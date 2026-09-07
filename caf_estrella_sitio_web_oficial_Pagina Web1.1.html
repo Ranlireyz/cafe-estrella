@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Estrella | Sabor Artesanal & Pasión Por El Origen</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            50: '#fdfbf7',
+                            100: '#f7f0e6',
+                            200: '#ebdcc8',
+                            300: '#dbbf9f',
+                            400: '#c59d74',
+                            500: '#b17e4f',
+                            600: '#97623d',
+                            700: '#794b32',
+                            800: '#5a3727',
+                            900: '#3d251a',
+                            950: '#1e100a',
+                        },
+                        amberGold: '#d97706',
+                        warmCream: '#fcf8f2'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #1e100a;
+            color: #f7f0e6;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(30, 16, 10, 0.45), rgba(30, 16, 10, 0.95)), 
+                        url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        .glass-panel {
+            background: rgba(61, 37, 26, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(219, 191, 159, 0.15);
+        }
+        .glass-panel-light {
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(177, 126, 79, 0.2);
+        }
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(217, 119, 6, 0.25);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2b170e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #794b32;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar overflow-x-hidden selection:bg-amber-600 selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-coffee-950 font-bold shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-bold fa-star text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-white block leading-none">Café Estrella</span>
+                        <span class="text-[10px] tracking-widest text-amber-400 uppercase font-semibold">Tueste & Especialidad</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#inicio" class="text-amber-200 hover:text-amber-400 transition-colors">Inicio</a>
+                    <a href="#experiencia" class="text-stone-300 hover:text-amber-400 transition-colors">Nuestra Pasión</a>
+                    <a href="#menu" class="text-stone-300 hover:text-amber-400 transition-colors">Menú de Especialidad</a>
+                    <a href="#granos" class="text-stone-300 hover:text-amber-400 transition-colors">Granos de Origen</a>
+                    <a href="#metodos" class="text-stone-300 hover:text-amber-400 transition-colors">Métodos</a>
+                    <a href="#contacto" class="text-stone-300 hover:text-amber-400 transition-colors">Ubicación</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full text-stone-300 hover:text-amber-400 hover:bg-coffee-900/60 transition-all">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count-badge" class="absolute -top-1 -right-1 bg-amber-500 text-coffee-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    <!-- Reservation Button -->
+                    <button onclick="openModal('reservation-modal')" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-coffee-950 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-amber-500/20 transition-all transform hover:-translate-y-0.5 text-sm">
+                        <i class="fa-regular fa-calendar-check mr-2"></i>Reservar Mesa
+                    </button>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <div class="flex items-center space-x-3 md:hidden">
+                    <button onclick="toggleCartDrawer()" class="relative p-2 rounded-lg text-amber-300">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count-mobile" class="absolute -top-1 -right-1 bg-amber-500 text-coffee-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="p-2 text-stone-200 hover:text-amber-400 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-amber-900/50 px-4 pt-4 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-amber-200 font-medium border-b border-coffee-800/40">Inicio</a>
+            <a href="#experiencia" onclick="toggleMobileMenu()" class="block py-2 text-stone-300 font-medium border-b border-coffee-800/40">Nuestra Pasión</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block py-2 text-stone-300 font-medium border-b border-coffee-800/40">Menú de Especialidad</a>
+            <a href="#granos" onclick="toggleMobileMenu()" class="block py-2 text-stone-300 font-medium border-b border-coffee-800/40">Granos de Origen</a>
+            <a href="#metodos" onclick="toggleMobileMenu()" class="block py-2 text-stone-300 font-medium border-b border-coffee-800/40">Métodos de Extracción</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 text-stone-300 font-medium border-b border-coffee-800/40">Ubicación</a>
+            <div class="pt-2">
+                <button onclick="toggleMobileMenu(); openModal('reservation-modal')" class="w-full bg-amber-500 text-coffee-950 font-bold py-3 rounded-xl shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-calendar-check"></i> Reservar Una Mesa
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 hero-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 backdrop-blur-md mb-6 animate-pulse">
+                <i class="fa-solid fa-award text-amber-400 text-xs"></i>
+                <span class="text-xs uppercase tracking-wider font-semibold text-amber-300">Tueste Fresco Diario & Comercio Directo</span>
+            </div>
+            
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 leading-tight">
+                El Arte del Café <br class="hidden sm:inline">
+                <span class="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent">En Cada Gota</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-stone-300 mb-10 font-light leading-relaxed">
+                Descubre el equilibrio perfecto entre aroma, cuerpo y aroma artesanal. Seleccionamos cuidadosamente los mejores micro-lotes de altura para regalarte una experiencia sensorial inolvidable.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold px-8 py-4 rounded-full shadow-lg shadow-amber-500/20 transition-all transform hover:-translate-y-1 text-center">
+                    Explorar Menú <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#quiz-section" class="w-full sm:w-auto border border-amber-400/40 hover:bg-amber-400/10 text-amber-200 font-semibold px-8 py-4 rounded-full backdrop-blur-sm transition-all text-center">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2 text-amber-400"></i> Descubre Tu Café Ideal
+                </a>
+            </div>
+
+            <!-- Quick highlights badges -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-panel p-4 rounded-2xl text-center">
+                    <p class="text-2xl font-bold font-serif text-amber-400">100%</p>
+                    <p class="text-xs text-stone-300 mt-1 uppercase tracking-wider">Arábica De Altura</p>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl text-center">
+                    <p class="text-2xl font-bold font-serif text-amber-400">+1,800m</p>
+                    <p class="text-xs text-stone-300 mt-1 uppercase tracking-wider">Elevación Cultivo</p>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl text-center">
+                    <p class="text-2xl font-bold font-serif text-amber-400">4.9 ★</p>
+                    <p class="text-xs text-stone-300 mt-1 uppercase tracking-wider">+2,500 Opiniones</p>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl text-center">
+                    <p class="text-2xl font-bold font-serif text-amber-400">Artesanal</p>
+                    <p class="text-xs text-stone-300 mt-1 uppercase tracking-wider">Tueste En Lote Pequeño</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz-section" class="py-20 bg-coffee-900/60 border-y border-amber-900/30 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Recomendador Personalizado</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2">¿Cuál es tu perfil de sabor ideal?</h2>
+                <p class="text-stone-300 text-sm mt-2">Responde 3 sencillas preguntas y nuestro Barista Digital te sugerirá tu preparación perfecta en Café Estrella.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl">
+                <!-- Step 1 -->
+                <div id="quiz-step-1" class="space-y-6">
+                    <div class="flex items-center justify-between text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                        <span>Paso 1 de 3</span>
+                        <span>Intensidad Deseada</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-100">¿Cómo te gusta la intensidad y cuerpo de tu bebida?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button onclick="selectQuizOption(1, 'suave')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-feather text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Suave & Delicado</p>
+                            <p class="text-xs text-stone-400 mt-1">Notas florales, acidez sutil y cuerpo ligero.</p>
+                        </button>
+                        <button onclick="selectQuizOption(1, 'balanceado')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-scale-balanced text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Equilibrado</p>
+                            <p class="text-xs text-stone-400 mt-1">Sabor redondo con dulzor acaramelado y acidez brillante.</p>
+                        </button>
+                        <button onclick="selectQuizOption(1, 'intenso')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-fire-flame-curved text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Intenso & Robusto</p>
+                            <p class="text-xs text-stone-400 mt-1">Cuerpo denso, notas a cacao amargo y tueste profundo.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="quiz-step-2" class="hidden space-y-6">
+                    <div class="flex items-center justify-between text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                        <span>Paso 2 de 3</span>
+                        <span>Preferencia de Leche</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-100">¿Prefieres tu café solo o con acompañamiento cremoso?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button onclick="selectQuizOption(2, 'solo')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-mug-hot text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">100% Negro / Solo</p>
+                            <p class="text-xs text-stone-400 mt-1">Aprecio la pureza del grano y los aceites naturales.</p>
+                        </button>
+                        <button onclick="selectQuizOption(2, 'leche')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-cow text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Leche Texturizada</p>
+                            <p class="text-xs text-stone-400 mt-1">Microespuma sedosa de leche entera o descremada.</p>
+                        </button>
+                        <button onclick="selectQuizOption(2, 'vegetal')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-seedling text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Bebida Vegetal</p>
+                            <p class="text-xs text-stone-400 mt-1">Leche de avendra, almendra o soya de especialidad.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="quiz-step-3" class="hidden space-y-6">
+                    <div class="flex items-center justify-between text-xs text-amber-400 font-semibold uppercase tracking-wider">
+                        <span>Paso 3 de 3</span>
+                        <span>Momento del Día</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-100">¿En qué momento vas a disfrutar tu taza?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button onclick="finishQuiz('mañana')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-sun text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Mañanas Enérgicas</p>
+                            <p class="text-xs text-stone-400 mt-1">Para despertar los sentidos y arrancar el día con fuerza.</p>
+                        </button>
+                        <button onclick="finishQuiz('tarde')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-cloud-sun text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Tarde De Pausa</p>
+                            <p class="text-xs text-stone-400 mt-1">Un respiro reflexivo durante el trabajo o lectura.</p>
+                        </button>
+                        <button onclick="finishQuiz('noche')" class="p-5 rounded-2xl bg-coffee-800/50 hover:bg-amber-600/20 border border-amber-900/40 hover:border-amber-400 text-left transition-all group">
+                            <i class="fa-solid fa-moon text-amber-400 text-2xl mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="font-bold text-white">Noche Cálida</p>
+                            <p class="text-xs text-stone-400 mt-1">Bebida confortante para cerrar la jornada (opción descafeinada disp.).</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Box -->
+                <div id="quiz-result" class="hidden text-center py-6 space-y-6">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-2xl border border-amber-400/40">
+                        <i class="fa-solid fa-mug-saucer"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">Tu Combinación Estrella</span>
+                        <h3 id="recommended-title" class="font-serif text-3xl font-bold text-white mt-1">Espresso Tueste Medio + V60</h3>
+                        <p id="recommended-desc" class="text-stone-300 max-w-lg mx-auto text-sm mt-3">Basado en tus elecciones, te recomendamos nuestro café de Origen Huila elaborado en método de goteo manual para resaltar las notas cítricas suaves y miel.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="addRecommendedToCart()" class="bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold px-6 py-3 rounded-full shadow-lg text-sm">
+                            <i class="fa-solid fa-cart-plus mr-2"></i> Ordenar esta recomendación
+                        </button>
+                        <button onclick="resetQuiz()" class="text-stone-400 hover:text-white underline text-sm py-3">
+                            Reiniciar test
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencia" class="py-24 bg-coffee-950 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <div class="relative">
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl border border-amber-900/40 relative">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80" alt="Barista preparando café estrella" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-coffee-950 via-transparent to-transparent opacity-80"></div>
+                    </div>
+                    <!-- Badge Overlay -->
+                    <div class="absolute -bottom-6 -right-6 sm:bottom-8 sm:-right-8 glass-panel p-6 rounded-2xl max-w-xs border border-amber-500/30 hidden sm:block">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Grano 100% Ético</h4>
+                                <p class="text-xs text-stone-400 mt-0.5">Compramos directamente a pequeños productores de la sierra.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-sparkles"></i> Nuestra Historia & Filosofía
+                    </div>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-white leading-tight">
+                        Donde la pasión por el origen se convierte en arte.
+                    </h2>
+                    <p class="text-stone-300 leading-relaxed font-light">
+                        En <strong class="text-amber-400 font-semibold">Café Estrella</strong>, concebimos cada taza como una obra única. Desde los fértiles suelos volcánicos a más de 1,800 metros sobre el nivel del mar, seleccionamos los cerezos maduros a mano.
+                    </p>
+                    <p class="text-stone-300 leading-relaxed font-light">
+                        Nuestro maestro tostador ajusta las curvas de tueste para despertar los perfiles aromáticos más complejos: notas de chocolate oscuro, avellanas tostadas y sutiles toques de frutos rojos.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-coffee-800 text-amber-400 flex items-center justify-center shrink-0 border border-amber-900/40">
+                                <i class="fa-solid fa-fire text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Tueste Artesanal</h4>
+                                <p class="text-xs text-stone-400 mt-1">Control milimétrico del perfil de tueste en pequeños lotes semanales.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-coffee-800 text-amber-400 flex items-center justify-center shrink-0 border border-amber-900/40">
+                                <i class="fa-solid fa-heart text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Atención Cercana</h4>
+                                <p class="text-xs text-stone-400 mt-1">Baristas certificados apasionados por guiar tu viaje del café.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-24 bg-coffee-900/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Carta & Especialidades</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-white mt-2">Menú de Café Estrella</h2>
+                <p class="text-stone-300 text-sm mt-3">Una cuidada selección de bebidas calientes, frías y repostería artesanal horneada cada mañana.</p>
+                
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="menu-category-tabs">
+                    <button onclick="filterMenu('todos')" class="menu-tab-btn active px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-amber-500 text-coffee-950 shadow-md">
+                        Todos
+                    </button>
+                    <button onclick="filterMenu('espressos')" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-coffee-800/80 text-stone-300 hover:text-white hover:bg-coffee-700">
+                        Espresso & Calientes
+                    </button>
+                    <button onclick="filterMenu('frios')" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-coffee-800/80 text-stone-300 hover:text-white hover:bg-coffee-700">
+                        Cold Brew & Fríos
+                    </button>
+                    <button onclick="filterMenu('reposteria')" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all bg-coffee-800/80 text-stone-300 hover:text-white hover:bg-coffee-700">
+                        Repostería Artesanal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-items-container">
+                <!-- Javascript will render cards here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="granos" class="py-24 bg-coffee-950 border-t border-amber-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Llévalo a Casa</span>
+                    <h2 class="font-serif text-4xl font-bold text-white mt-1">Granos de Origen Seleccionado</h2>
+                    <p class="text-stone-400 text-sm mt-2 max-w-xl">Bolsas de 250g y 1kg de tueste fresco. Molido a la medida de tu cafetera favorita sin costo adicional.</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="inline-flex items-center text-xs text-amber-300 bg-amber-500/10 px-4 py-2 rounded-full border border-amber-500/20">
+                        <i class="fa-solid fa-truck-fast mr-2"></i> Envío gratis en compras mayores a $35
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="coffee-beans-container">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="metodos" class="py-24 bg-coffee-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Ritual del Café</span>
+                <h2 class="font-serif text-4xl font-bold text-white mt-2">Métodos de Extracción en Barra</h2>
+                <p class="text-stone-300 text-sm mt-2">En nuestra cafetería preparamos tu café según la experiencia sensorial que busques.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Method 1 -->
+                <div class="glass-panel p-6 rounded-3xl hover:border-amber-500/40 transition-all text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-filter"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">V60 Pour-Over</h3>
+                    <p class="text-amber-400 text-xs font-semibold mt-1">Tasa Limpia & Floral</p>
+                    <p class="text-stone-400 text-xs mt-3 leading-relaxed">Filtrado en papel cónico que resalta las notas ácidas, florales y cítricas del grano con claridad excepcional.</p>
+                </div>
+
+                <!-- Method 2 -->
+                <div class="glass-panel p-6 rounded-3xl hover:border-amber-500/40 transition-all text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Chemex</h3>
+                    <p class="text-amber-400 text-xs font-semibold mt-1">Cuerpo Ligero & Sedoso</p>
+                    <p class="text-stone-400 text-xs mt-3 leading-relaxed">Filtro más grueso que elimina amargores y sedimentos, resultando en una bebida delicada y dulzona.</p>
+                </div>
+
+                <!-- Method 3 -->
+                <div class="glass-panel p-6 rounded-3xl hover:border-amber-500/40 transition-all text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-compress"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Aeropress</h3>
+                    <p class="text-amber-400 text-xs font-semibold mt-1">Intensidad & Redondez</p>
+                    <p class="text-stone-400 text-xs mt-3 leading-relaxed">Inmersión y presión de aire que extraen un café de gran cuerpo y menor acidez en poco tiempo.</p>
+                </div>
+
+                <!-- Method 4 -->
+                <div class="glass-panel p-6 rounded-3xl hover:border-amber-500/40 transition-all text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-glass-water"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Prensa Francesa</h3>
+                    <p class="text-amber-400 text-xs font-semibold mt-1">Textura Oleosa & Densa</p>
+                    <p class="text-stone-400 text-xs mt-3 leading-relaxed">Inmersión completa que conserva los aceites esenciales del café para una textura sumamente aromática.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-coffee-950 border-t border-amber-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Comunidad Estrella</span>
+                <h2 class="font-serif text-4xl font-bold text-white mt-2">Lo que dicen quienes nos visitan</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-panel p-8 rounded-3xl relative">
+                    <div class="flex text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-stone-300 text-sm italic leading-relaxed">
+                        "El mejor Flat White de la ciudad sin duda alguna. El ambiente cálido y el aroma a grano recién tostado te atrapan en cuanto entras. Totalmente recomendado."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">
+                            VAL
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Valeria M.</h4>
+                            <p class="text-xs text-stone-400">Cliente Frecuente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-panel p-8 rounded-3xl relative">
+                    <div class="flex text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-stone-300 text-sm italic leading-relaxed">
+                        "Compré una bolsa del lote Huila Especial para preparar V60 en casa y fue increíble. La explicación del barista sobre las notas de cata dio justo en el clavo."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">
+                            CAR
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Carlos R.</h4>
+                            <p class="text-xs text-stone-400">Entusiasta del Café</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-panel p-8 rounded-3xl relative">
+                    <div class="flex text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-stone-300 text-sm italic leading-relaxed">
+                        "Un rincón perfecto para trabajar o conversar serenamente. El croissant de mantequilla con su Espresso Doble es mi ritual de todos los viernes."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">
+                            SIA
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Sofia A.</h4>
+                            <p class="text-xs text-stone-400">Diseñadora & Visitante</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-coffee-900/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Contact info -->
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-amber-400 uppercase tracking-widest text-xs font-bold">Ven a Conocernos</span>
+                        <h2 class="font-serif text-4xl font-bold text-white mt-1">Ubicación & Horarios</h2>
+                        <p class="text-stone-300 text-sm mt-3 leading-relaxed">
+                            Te esperamos con las tazas listas y el horno encendido. Visítanos en nuestra barra principal o haz una reserva previa.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 glass-panel p-4 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Dirección Barra Central</h4>
+                                <p class="text-xs text-stone-300 mt-0.5">Av. Del Aroma #450, Distrito Artesanal</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 glass-panel p-4 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Horarios de Atención</h4>
+                                <p class="text-xs text-stone-300 mt-0.5">Lunes a Viernes: 7:00 am - 9:00 pm</p>
+                                <p class="text-xs text-stone-300">Sábados y Domingos: 8:00 am - 10:00 pm</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 glass-panel p-4 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Contacto & Consultas</h4>
+                                <p class="text-xs text-stone-300 mt-0.5">+1 (555) 378-7355 | hola@cafeestrella.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('reservation-modal')" class="bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold px-8 py-3.5 rounded-full shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i> Reservar Tu Mesa Ahora
+                    </button>
+                </div>
+
+                <!-- Simulated Interactive Map Frame -->
+                <div class="glass-panel p-4 rounded-3xl border border-amber-900/40 relative overflow-hidden h-96">
+                    <div class="w-full h-full rounded-2xl bg-coffee-950 relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+                        <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        
+                        <!-- Map Marker Pin -->
+                        <div class="relative z-10 w-16 h-16 rounded-full bg-amber-500 text-coffee-950 flex items-center justify-center text-2xl font-bold shadow-2xl animate-bounce mb-4">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-white relative z-10">Café Estrella Central</h3>
+                        <p class="text-xs text-amber-300 mt-1 relative z-10">Av. Del Aroma #450 - Zona Rosa</p>
+                        <p class="text-xs text-stone-400 mt-3 max-w-xs relative z-10">Estacionamiento disponible & zona pet-friendly en terraza.</p>
+                        
+                        <div class="mt-6 flex gap-3 relative z-10">
+                            <button onclick="showToast('Abriendo coordenadas en GPS...')" class="bg-coffee-800 hover:bg-coffee-700 text-white text-xs px-4 py-2 rounded-full border border-amber-500/30">
+                                <i class="fa-solid fa-diamond-turn-right mr-1.5 text-amber-400"></i> Cómo Llegar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-coffee-950 border-t border-amber-900/40 text-stone-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-coffee-950 font-bold">
+                            <i class="fa-solid fa-star text-sm"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">Café Estrella</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        Pasión por la maestría en el tostado y amor por la cultura del buen café desde el origen.
+                    </p>
+                    <div class="flex space-x-3 text-amber-400">
+                        <a href="#" class="w-8 h-8 rounded-full bg-coffee-900 flex items-center justify-center hover:bg-amber-500 hover:text-coffee-950 transition-all"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-coffee-900 flex items-center justify-center hover:bg-amber-500 hover:text-coffee-950 transition-all"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-coffee-900 flex items-center justify-center hover:bg-amber-500 hover:text-coffee-950 transition-all"><i class="fa-brands fa-tiktok text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Quick Links -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4 uppercase tracking-wider">Navegación</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#inicio" class="hover:text-amber-400 transition-colors">Inicio</a></li>
+                        <li><a href="#experiencia" class="hover:text-amber-400 transition-colors">Nuestra Pasión</a></li>
+                        <li><a href="#menu" class="hover:text-amber-400 transition-colors">Menú & Repostería</a></li>
+                        <li><a href="#granos" class="hover:text-amber-400 transition-colors">Bolsas de Granos</a></li>
+                        <li><a href="#contacto" class="hover:text-amber-400 transition-colors">Barra & Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Specialties -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4 uppercase tracking-wider">Especialidades</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><span class="hover:text-amber-400 cursor-pointer">Espresso Doble Origen</span></li>
+                        <li><span class="hover:text-amber-400 cursor-pointer">Cold Brew Nitro</span></li>
+                        <li><span class="hover:text-amber-400 cursor-pointer">Latte Caramelo Salado</span></li>
+                        <li><span class="hover:text-amber-400 cursor-pointer">Croissant Mantequilla</span></li>
+                        <li><span class="hover:text-amber-400 cursor-pointer">Lotes de Selección Huila</span></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Subscription -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-2 uppercase tracking-wider">Club del Café</h4>
+                    <p class="text-xs text-stone-400 mb-4">Suscríbete y recibe 10% de descuento en tu primer paquete de granos.</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
+                        <input type="email" required placeholder="Tu correo electrónico" class="w-full bg-coffee-900 border border-amber-900/50 rounded-xl px-4 py-2 text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-400">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold text-xs py-2.5 rounded-xl transition-colors">
+                            Suscribirme
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-coffee-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500">
+                <p>&copy; 2026 Café Estrella. Todos los derechos reservados.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-stone-300">Privacidad</a>
+                    <a href="#" class="hover:text-stone-300">Términos del Servicio</a>
+                    <a href="#" class="hover:text-stone-300">Envíos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="reservation-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel-light text-coffee-950 rounded-3xl p-6 sm:p-8 max-w-lg w-full mx-4 relative transform scale-95 transition-transform duration-300" id="reservation-modal-content">
+            <!-- Close Button -->
+            <button onclick="closeModal('reservation-modal')" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-stone-200 hover:bg-stone-300 flex items-center justify-center text-stone-700">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-700 flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-coffee-900">Reserva Tu Mesa</h3>
+                <p class="text-xs text-stone-600 mt-1">Asegura tu lugar en Café Estrella para una experiencia inolvidable.</p>
+            </div>
+
+            <form onsubmit="handleReservationSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Nombre Completo</label>
+                    <input type="text" required placeholder="Ej. Ana María García" class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Fecha</label>
+                        <input type="date" required class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Hora</label>
+                        <select required class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                            <option value="">Seleccionar</option>
+                            <option value="08:00">08:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="18:00">06:00 PM</option>
+                            <option value="20:00">08:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Personas</label>
+                        <select required class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                            <option value="1">1 Personas</option>
+                            <option value="2" selected>2 Personas</option>
+                            <option value="4">4 Personas</option>
+                            <option value="6">6+ Grupal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Zona</label>
+                        <select class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                            <option value="interior">Interior Cenas</option>
+                            <option value="terraza">Terraza Jardín</option>
+                            <option value="barra">Barra Principal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Teléfono o WhatsApp</label>
+                    <input type="tel" required placeholder="+1 555-0000" class="w-full bg-white border border-stone-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-amber-600">
+                </div>
+
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md mt-4 text-sm">
+                    Confirmar Reserva
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-96 bg-coffee-950 border-l border-amber-900/40 z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-coffee-800 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-bag-shopping text-amber-400 text-xl"></i>
+                <h3 class="font-serif text-xl font-bold text-white">Tu Pedido</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="text-stone-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+            <!-- Items rendered via JavaScript -->
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-6 border-t border-coffee-800 bg-coffee-900/50 space-y-4">
+            <div class="flex items-center justify-between text-stone-300 text-sm">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" class="font-bold text-white">$0.00</span>
+            </div>
+            <div class="flex items-center justify-between text-stone-300 text-sm">
+                <span>Impuestos & Servicio</span>
+                <span class="text-xs text-amber-400">Calculado en checkout</span>
+            </div>
+            <div class="border-t border-coffee-800 pt-3 flex items-center justify-between text-lg font-bold text-white">
+                <span>Total Estimado</span>
+                <span id="cart-total" class="text-amber-400">$0.00</span>
+            </div>
+
+            <button onclick="checkoutCart()" class="w-full bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold py-3.5 rounded-xl transition-all text-sm shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-credit-card"></i> Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script>
+        // Sample Menu Items Data
+        const menuData = [
+            {
+                id: 'm1',
+                name: 'Espresso Doble Estrella',
+                category: 'espressos',
+                price: 3.80,
+                desc: 'Extracción concentrada con crema densa color avellana y notas de cacao amargo.',
+                image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80',
+                tag: 'Popular'
+            },
+            {
+                id: 'm2',
+                name: 'Flat White Vellutato',
+                category: 'espressos',
+                price: 4.50,
+                desc: 'Doble shot de espresso combinado con microespuma de leche sedosa.',
+                image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80',
+                tag: 'Recomendado'
+            },
+            {
+                id: 'm3',
+                name: 'Cold Brew Infusión 18h',
+                category: 'frios',
+                price: 4.90,
+                desc: 'Extracción lenta en agua fría durante 18 horas. Sabor dulce y acidez muy baja.',
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80',
+                tag: 'Refrescante'
+            },
+            {
+                id: 'm4',
+                name: 'Latte Miel & Avellana',
+                category: 'espressos',
+                price: 5.20,
+                desc: 'Espresso suave infusionado con jarabe de avellana silvestre y toque de miel orgánica.',
+                image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80',
+                tag: 'Autor'
+            },
+            {
+                id: 'm5',
+                name: 'Espresso Tonic Citrón',
+                category: 'frios',
+                price: 5.50,
+                desc: 'Agua tónica artesanal, hielo, cascara de naranja y shot flote de espresso artesanal.',
+                image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
+                tag: 'Tendencia'
+            },
+            {
+                id: 'm6',
+                name: 'Croissant Mantequilla Real',
+                category: 'reposteria',
+                price: 3.50,
+                desc: 'Hojaldre crujiente horneado diariamente con mantequilla de vaca pura.',
+                image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80',
+                tag: 'Fresco'
+            },
+            {
+                id: 'm7',
+                name: 'Tarta de Chocolate & Moka',
+                category: 'reposteria',
+                price: 4.80,
+                desc: 'Bizcocho húmedo de cacao con ganache de chocolate 70% infusionado en espresso.',
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80',
+                tag: 'Dulce'
+            }
+        ];
+
+        // Sample Coffee Beans Data
+        const beansData = [
+            {
+                id: 'b1',
+                name: 'Origen Huila - Selección Especial',
+                origin: 'Huila, Colombia (1,900m)',
+                notes: 'Cacao, Caramelo, Manzana Roja',
+                roast: 'Tueste Medio',
+                price: 18.50,
+                image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 'b2',
+                name: 'Reserva Volcánica Antigua',
+                origin: 'Antigua, Guatemala (1,850m)',
+                notes: 'Chocolate Negro, Especias, Almendra',
+                roast: 'Tueste Oscuro',
+                price: 19.80,
+                image: 'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 'b3',
+                name: 'Etiopía Yirgacheffe Geisha',
+                origin: 'Sidama, Etiopía (2,100m)',
+                notes: 'Jazmín, Bergamota, Miel',
+                roast: 'Tueste Ligero',
+                price: 22.00,
+                image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80'
+            }
+        ];
+
+        // Cart State
+        let cart = [];
+        let quizAnswers = {};
+
+        // Render Menu Items
+        function renderMenu(category = 'todos') {
+            const container = document.getElementById('menu-items-container');
+            const filtered = category === 'todos' ? menuData : menuData.filter(item => item.category === category);
+
+            container.innerHTML = filtered.map(item => `
+                <div class="glass-panel rounded-3xl overflow-hidden hover:border-amber-500/40 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-amber-500 text-coffee-950 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                                ${item.tag}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-serif text-xl font-bold text-white">${item.name}</h3>
+                                <span class="text-amber-400 font-bold text-lg">$${item.price.toFixed(2)}</span>
+                            </div>
+                            <p class="text-stone-300 text-xs mt-3 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="addToCart('${item.id}', '${item.name}', ${item.price}, '${item.image}')" class="w-full bg-coffee-800 hover:bg-amber-500 hover:text-coffee-950 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-2 border border-amber-900/40">
+                            <i class="fa-solid fa-plus"></i> Agregar al Pedido
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Coffee Beans
+        function renderBeans() {
+            const container = document.getElementById('coffee-beans-container');
+            container.innerHTML = beansData.map(bean => `
+                <div class="glass-panel p-6 rounded-3xl border border-amber-900/40 hover:border-amber-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden mb-5">
+                            <img src="${bean.image}" alt="${bean.name}" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mb-1">${bean.roast}</span>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-2">${bean.name}</h3>
+                        <p class="text-xs text-stone-300 mb-3"><i class="fa-solid fa-mountain text-amber-500 mr-1.5"></i> ${bean.origin}</p>
+                        <div class="bg-coffee-900/80 p-3 rounded-xl mb-4 border border-amber-900/30">
+                            <p class="text-[11px] text-stone-400 font-medium">Notas de Cata:</p>
+                            <p class="text-xs text-amber-200 font-semibold mt-0.5">${bean.notes}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs text-stone-400">Bolsa 250g en grano</span>
+                            <span class="text-xl font-bold text-amber-400">$${bean.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="addToCart('${bean.id}', '${bean.name}', ${bean.price}, '${bean.image}')" class="w-full bg-amber-500 hover:bg-amber-400 text-coffee-950 font-bold py-3 rounded-xl transition-colors text-xs flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-bag-shopping"></i> Comprar Bolsa
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Category Filter logic
+        function filterMenu(category) {
+            const tabs = document.querySelectorAll('.menu-tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-amber-500', 'text-coffee-950', 'shadow-md');
+                tab.classList.add('bg-coffee-800/80', 'text-stone-300');
+            });
+
+            event.currentTarget.classList.remove('bg-coffee-800/80', 'text-stone-300');
+            event.currentTarget.classList.add('bg-amber-500', 'text-coffee-950', 'shadow-md');
+
+            renderMenu(category);
+        }
+
+        // Quiz Logic
+        function selectQuizOption(step, val) {
+            quizAnswers[`step${step}`] = val;
+            document.getElementById(`quiz-step-${step}`).classList.add('hidden');
+            document.getElementById(`quiz-step-${step + 1}`).classList.remove('hidden');
+        }
+
+        function finishQuiz(val) {
+            quizAnswers['step3'] = val;
+            document.getElementById('quiz-step-3').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+
+            const title = document.getElementById('recommended-title');
+            const desc = document.getElementById('recommended-desc');
+
+            if (quizAnswers.step1 === 'suave') {
+                title.innerText = "V60 Origen Etiopía Geisha";
+                desc.innerText = "Una extracción sutil con notas a flores silvestres y miel. Perfecta para paladares delicados.";
+            } else if (quizAnswers.step2 === 'leche' || quizAnswers.step2 === 'vegetal') {
+                title.innerText = "Flat White Vellutato o Latte Avellana";
+                desc.innerText = "La perfecta armonía entre la cremosidad de la leche texturizada y el dulzor acaramelado de nuestro espresso.";
+            } else {
+                title.innerText = "Espresso Doble Estrella + Moka artesanal";
+                desc.innerText = "Un perfil con mucho cuerpo, notas a chocolate amargo y un retrogusto duradero y elegante.";
+            }
+        }
+
+        function resetQuiz() {
+            quizAnswers = {};
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-step-1').classList.remove('hidden');
+        }
+
+        function addRecommendedToCart() {
+            addToCart('rec1', 'Recomendación Barista Digital', 5.00, 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=600&q=80');
+            showToast('¡Recomendación agregada a tu carrito!');
+        }
+
+        // Cart Drawer Logic
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-drawer-backdrop');
+            
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                backdrop.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                backdrop.classList.add('hidden');
+            }
+        }
+
+        function addToCart(id, name, price, image) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id, name, price, image, qty: 1 });
+            }
+            updateCartUI();
+            showToast(`"${name}" añadido a la bolsa`);
+        }
+
+        function updateCartQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Badges
+            const badgeDesktop = document.getElementById('cart-count-badge');
+            const badgeMobile = document.getElementById('cart-count-mobile');
+            
+            if (totalCount > 0) {
+                badgeDesktop.innerText = totalCount;
+                badgeDesktop.classList.remove('hidden');
+                badgeMobile.innerText = totalCount;
+                badgeMobile.classList.remove('hidden');
+            } else {
+                badgeDesktop.classList.add('hidden');
+                badgeMobile.classList.add('hidden');
+            }
+
+            // Totals
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${subtotal.toFixed(2)}`;
+
+            // Render Items
+            const container = document.getElementById('cart-items-list');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-stone-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-coffee-800"></i>
+                        <p class="text-sm">Tu bolsa de café está vacía</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between gap-3 bg-coffee-900/60 p-3 rounded-2xl border border-amber-900/30">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-xl object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                            <p class="text-xs text-amber-400 font-semibold mt-0.5">$${(item.price * item.qty).toFixed(2)}</p>
+                        </div>
+                        <div class="flex items-center bg-coffee-800 rounded-lg p-1 text-xs">
+                            <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 text-stone-300 hover:text-white flex items-center justify-center">-</button>
+                            <span class="px-2 font-bold text-white">${item.qty}</span>
+                            <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 text-stone-300 hover:text-white flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showToast('Añade productos antes de procesar el pago.');
+                return;
+            }
+            showToast('¡Redirigiendo a pasarela segura de pago!');
+            setTimeout(() => {
+                cart = [];
+                updateCartUI();
+                toggleCartDrawer();
+            }, 1500);
+        }
+
+        // Modal Controls
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const content = document.getElementById(`${modalId}-content`);
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            if(content) content.classList.remove('scale-95');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const content = document.getElementById(`${modalId}-content`);
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            if(content) content.classList.add('scale-95');
+        }
+
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            closeModal('reservation-modal');
+            showToast('¡Reserva confirmada! Te enviamos un resumen por WhatsApp.');
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('¡Gracias por suscribirte al Club Café Estrella!');
+        }
+
+        // Mobile Menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Custom Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto bg-amber-500 text-coffee-950 font-bold px-4 py-3 rounded-2xl shadow-xl text-xs flex items-center gap-2 transform translate-y-4 transition-all duration-300';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> ${message}`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-coffee-950/90', 'backdrop-blur-md', 'shadow-xl', 'border-b', 'border-amber-900/40');
+            } else {
+                nav.classList.remove('bg-coffee-950/90', 'backdrop-blur-md', 'shadow-xl', 'border-b', 'border-amber-900/40');
+            }
+        });
+
+        // Initial Load Initialization
+        window.onload = function() {
+            renderMenu();
+            renderBeans();
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
